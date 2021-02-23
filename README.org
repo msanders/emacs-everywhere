@@ -46,6 +46,23 @@ non-nil).
 If you do /not/ wish to paste the buffer content into the original window, =C-c
 C-k= still copies the content to the clipboard, but never pastes.
 
+** macOS
+
+*** Hammerspoon
+
+A hotkey can be defined on macOS using [[https://www.hammerspoon.org][Hammerspoon]] with the following:
+
+#+begin_src lua
+hyper = {"cmd", "alt", "ctrl"}
+hs.hotkey.bindSpec({hyper, "e"}, function ()
+    hs.task.new("/bin/sh", nil, {
+        "-l",
+        "-c",
+        "emacsclient --eval '(emacs-everywhere)'"
+    }):start()
+end)
+#+end_src
+
 -----
 
 ^{*†*} This requires the Emacs daemon to be running, but that's super easy.
